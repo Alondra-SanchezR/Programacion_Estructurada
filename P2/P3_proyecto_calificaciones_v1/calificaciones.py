@@ -1,72 +1,72 @@
-calificacion={}
+calificacion = {}
 
 def borrarPantalla():
     import os
     os.system('cls')
 
 def esperarTecla():
-    input("\t\t\t\t :::. ➤ Oprima cualquier tecla para continuar... ⏭️")
+    input("\n" + "\t" * 4 + "🕹️  Presiona cualquier tecla para continuar... ")
 
 def menu_principal():
-    print("\n\t\t\t\t🎓✨ .::: SISTEMA DE CALIFICACIONES :::. ✨🎓\n")
-    print("\t\t\t\t\t ➊ 📥 Agregar calificaciones")
-    print("\t\t\t\t\t ➋ 📋 Mostrar calificaciones")
-    print("\t\t\t\t\t ➌ 📊 Calcular promedio")
-    print("\t\t\t\t\t ➍ 🔎 Buscar")
-    print("\t\t\t\t\t ➎ ❌ Salir\n")
-    opcion = input("\t\t\t\t\t🔽 Elige una opción (1-5): ")
-    return opcion
+    print("\n" + "\t" * 3 + "🎓✨═══════════════════════════════════════════════")
+    print("\t" * 3 + "       SISTEMA DE CALIFICACIONES        ")
+    print("\t" * 3 + "═══════════════════════════════════════════════✨🎓\n")
+    print("\t" * 4 + "1️⃣  📥 Agregar calificaciones")
+    print("\t" * 4 + "2️⃣  📋 Mostrar calificaciones")
+    print("\t" * 4 + "3️⃣  📊 Calcular promedio")
+    print("\t" * 4 + "4️⃣  🔍 Buscar")
+    print("\t" * 4 + "5️⃣  ❌ Salir\n")
+    return input("\t" * 4 + "🔽 Elige una opción (1-5): ")
 
 def agregar_calificacion(lista):
     borrarPantalla()
-    print("\t\t\t\t➕ .:: AGREGAR CALIFICACIONES ::. ➕\n")
-    nombre = input("\t\t\t👤 Nombre del alumno: ").upper().strip()
+    print("\n" + "\t" * 4 + "➕════════════ AGREGAR CALIFICACIONES ════════════➕\n")
+    nombre = input("\t" * 4 + "👤 Nombre del alumno: ").upper().strip()
     calificaciones = []
     for i in range(1, 4):
-        continua = True
-        while continua:
+        while True:
             try:
-                cal = float(input(f"\n\t\t\t📚 Calificación {i}: "))
+                cal = float(input(f"\n\t" * 4 + f"📚 Calificación {i}: "))
                 if 0 <= cal <= 10:
                     calificaciones.append(cal)
                     break
                 else:
-                    print("\n\t\t\t❌ Error: La calificación debe estar entre 0 y 10 ❌")
+                    print("\n" + "\t" * 4 + "❌ Error: La calificación debe estar entre 0 y 10.")
             except ValueError:
-                print("\n\t\t\t🚫 Entrada inválida. Debe ser un valor numérico  🚫")
+                print("\n" + "\t" * 4 + "🚫 Entrada inválida. Debe ser un número.")
     lista.append([nombre] + calificaciones)
-    print("\n\t\t\t✅ Calificaciones agregadas exitosamente ✅\n")
+    print("\n" + "\t" * 4 + "✅ Calificaciones agregadas exitosamente ✅\n")
 
 def mostrar_calificaciones(lista):
-    ancho = 115
     borrarPantalla()
-    print("\t\t\t\t📖 .:: MOSTRAR CALIFICACIONES ::. 📖\n")
-    if len(lista) > 0:
-        print(f"\t\t\t{'👨‍🎓 Nombre':<20}{'📝 Calif. 1':<12}{'📝 Calif. 2':<12}{'📝 Calif. 3':<12}")
-        print(("-" * 60).center(115))
+    print("\n" + "\t" * 4 + "📖═════════ LISTADO DE CALIFICACIONES ═════════📖\n")
+    if lista:
+        encabezado = f"{'👨‍🎓 Nombre':<20}{'📝 Calif. 1':<15}{'📝 Calif. 2':<15}{'📝 Calif. 3':<15}"
+        print("\t" * 3 + encabezado)
+        print("\t" * 3 + "-" * len(encabezado))
         for fila in lista:
-            print(f"\t\t\t\t{fila[0]:<15}{fila[1]:<12}{fila[2]:<12}{fila[3]:<12}")
-        print(("-" * 60).center(ancho))
-        cuantos = len(lista)
-        print(f"\n\t\t\t📌 Total de alumnos registrados: {cuantos} \n")
+            print("\t" * 3 + f"{fila[0]:<20}{fila[1]:<15}{fila[2]:<15}{fila[3]:<15}")
+        print("\t" * 3 + "-" * len(encabezado))
+        print(f"\n\t" * 4 + f"📌 Total de alumnos registrados: {len(lista)}\n")
     else:
-        print("\t\t\t\t⚠️  No hay calificaciones registradas.\n")
+        print("\t" * 4 + "⚠️  No hay calificaciones registradas.\n")
 
 def calcular_promedio(lista):
     borrarPantalla()
-    ancho = 90
-    print("\t\t\t\t📊 .:: PROMEDIOS GENERALES ::. 📊\n")
-    if len(lista) > 0:
-        print(f"\t\t\t{'👨‍🏫 Nombre':<20}{'📈 Promedio':<12}")
-        print(("-" * 32).center(90))
+    print("\n" + "\t" * 4 + "📊═════════ PROMEDIOS GENERALES ═════════📊\n")
+    if lista:
+        encabezado = f"{'👨‍🏫 Nombre':<20}{'📈 Promedio':<12}"
+        print("\t" * 3 + encabezado)
+        print("\t" * 3 + "-" * len(encabezado))
         promedio_grupal = 0 
         for fila in lista:
             nombre = fila[0]
             promedio = sum(fila[1:]) / 3
-            print(f"\t\t\t\t{nombre:<15}{promedio:<12.2f}")
+            print("\t" * 3 + f"{nombre:<20}{promedio:<12.2f}")
             promedio_grupal += promedio
-        print(("-" * 32).center(ancho))
-        promedio_grupal = promedio_grupal / len(lista)
-        print(f"\n\t\t\t🏆 Promedio general del grupo: {promedio_grupal:.2f}\n")
+        promedio_grupal /= len(lista)
+        print("\t" * 3 + "-" * len(encabezado))
+        print(f"\n\t" * 4 + f"🏆 Promedio general del grupo: {promedio_grupal:.2f}\n")
     else:
+        print("\t" * 4 + "⚠️  No hay registros para calcular promedio.\n")
         print("\t\t\t⚠️  No hay calificaciones registradas.\n")
